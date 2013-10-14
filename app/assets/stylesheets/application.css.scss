@@ -1,7 +1,6 @@
 
 @import "normalize";
 
-/*
 @import "compass/css3";
 
 $base-size: 16px;
@@ -13,24 +12,25 @@ $base-size: 16px;
 $container-padding-default: px2em(20px);
 $container-padding-large: 5%;
 $container-padding-xlarge: 10%;
+$transition-speed: 200ms;
 $sass-pink: #c6538c;
+$mq-small: 520px;
+$mq-medium: 768px;
+$mq-large: 1024px;
+$mq-xlarge: 1400px;
 
-$breakpoints: (
-  small: 520px,
-  small-max: 767px,
-  medium: 768px,
-  medium-max: 1023px,
-  large: 1024px,
-  large-max: 1399px,
-  xlarge: 1400px
-);
-
-@mixin mq($min-value, $max-value:null) {
-  @if map-has-key($breakpoints, $min-value) {
-    @media all and (min-width: map-get($breakpoints, $min-value)) { @content; }
+@mixin mq($min-value) {
+  @if $min-value == small {
+    @media all and (min-width: $mq-small) { @content; }
   }
-  @if map-has-key($breakpoints, $max-value) {
-    @media all and (min-width: map-get($breakpoints, $min-value)) and (max-width: map-get($breakpoints, $max-value)) { @content; }
+  @else if $min-value == medium {
+    @media all and (min-width: $mq-medium) { @content; }
+  }
+  @else if $min-value == large {
+    @media all and (min-width: $mq-large) { @content; }
+  }
+  @else if $min-value == xlarge {
+    @media all and (min-width: $mq-xlarge) { @content; }
   }
 }
 
@@ -116,6 +116,14 @@ p {
   font-weight: 400;
 }
 
+pre {
+  background-color: darken($sass-pink, 13%);
+  padding: 14px;
+  margin-bottom: 30px;
+
+  code { color: lighten($sass-pink, 35%); }
+}
+
 header { background-color: $sass-pink;
   * { color: #fff; }
 }
@@ -142,7 +150,7 @@ header { background-color: $sass-pink;
 
 .button {
   display: inline-block;
-  background-color: darken($sass-pink, 15%);
+  background-color: darken($sass-pink, 10%);
   padding: px2em(15px) px2em(35px);
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: px2em(16px);
@@ -152,10 +160,73 @@ header { background-color: $sass-pink;
     font-size: px2em(18px);
   }
   @include border-radius(4px);
-  @include single-transition(background-color, 200ms);
+  @include single-transition(background-color, $transition-speed);
 
-  &:hover { background-color: darken($sass-pink, 10%); }
+  &:hover { background-color: darken($sass-pink, 15%); }
   &:active { @include box-shadow(0 2px 2px rgba(black, 0.1) inset, 0 1px 0 rgba(white, 0.15)); }
+}
+
+.add-project {
+  display: none;
+  background: darken($sass-pink, 10%);
+  @include border-radius(4px);
+  padding: 30px;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  @include mq(medium) { width: 90%; }
+  @include mq(large) { width: 80%; }
+}
+
+.add-project-title {
+  margin-top: 0;
+  font-size: px2em(18px);
+}
+
+.instruction-list { padding-left: 20px; }
+
+.field {
+  float: left;
+  margin-right: 5px;
+  width: 50%;
+}
+
+.add-url {
+  line-height: 30px;
+  border: solid 2px darken($sass-pink, 10%);
+  color: #333;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border: solid 2px darken($sass-pink, 25%);
+  }
+}
+
+.add-url-button {
+  line-height: 28px;
+  border: none;
+  background-color: darken($sass-pink, 25%);
+  margin-top: 2px;
+  padding: 2px 20px 3px;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: px2em(14px);
+  @include single-transition(background, $transition-speed);
+
+  &:hover {
+    background-color: darken($sass-pink, 30%);
+  }
+}
+
+.cancel-button {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: px2em(30px);
+  @include single-transition(color, $transition-speed);
+
+  &:hover, &:active { color: lighten($sass-pink, 20%); }
 }
 
 .gallery-card > span {
@@ -211,7 +282,7 @@ header { background-color: $sass-pink;
   margin-bottom: 4px;
   font-size: px2em(11px);
   @include border-radius(4px);
-  @include single-transition(all, 200ms);
+  @include single-transition(all, $transition-speed);
 
   &:hover {
     background-color: $sass-pink;
@@ -260,4 +331,4 @@ footer {
 .authors {
   color: #888;
   margin-top: px2em(4px);
-}*/
+}

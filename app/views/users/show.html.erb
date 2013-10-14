@@ -1,31 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<table>
-	
-	 <thead>
-    <tr>
-      <th>Project Name</th>
-      <th>Description</th>
-      <th>Tags</th>
-    </tr>
-  </thead>
+<ul id="gallery">
+   <% @user_items.each do |item| %>
 
-	<% @user_items.each do |item| %>
-	 <tr>
-    <td><%= link_to item.name, "https://github.com/#{item.user}/#{item.reponame}" %></td>
-    <td><%= item.description %></td>
-      
-     <td>
-       <ul>
-         <% item.tags.each do |tag| %>
-            <div>
-              <li><a href=""><%= tag %></a></li>
-            </div>
-         <% end %>
-       </ul> 
-    </td>
-    </tr>
-	<% end %>
+    <li class="gallery-card">
+        <span>
+          <h1 class="card-title">
+            <%= link_to item.name, "https://github.com/#{item.user}/#{item.reponame}", :class => 'title-link' %>
+            <%= link_to item.user, "/users/#{item.user}", :class => 'author-filter' %>
+  
+          </h1>
 
-     </table>
+          <p class="card-description"><%= item.description %></p>
+
+          <ul class="tags">
+            <% item.tags.each do |tag| %>
+             <li class="tag-list-item"><a href="" class="tag"><%= tag %></a></li>
+            <% end %>
+          </ul>
+
+          <ul class="ghub-info">
+            <li class="last-updated">Last Updated: 12/34/56</li>
+            <li class="ghub-stars">Github Stars: 9,999</li>
+          </ul>
+        </span>
+      </li>
+   <% end %>
+</ul>
 

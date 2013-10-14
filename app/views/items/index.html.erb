@@ -1,13 +1,48 @@
-<h1>Listing items</h1>
+ 
+  <header>
+      <div class="title-cta">
+        <h1 class="page-title">Sassy Toolbox</h1>
+        <p class="page-description">A place to find the Sassiest of tools.</p>
+        <a class="button" href="#connect-github" data-add-project>Add Your Project</a>
+      </div>
+
+      <div class="add-project">
+        <h4 class="add-project-title">Adding a Project</h4>
+        <ol class="instruction-list">
+          <li>
+            <p>Add <code>sassmanifest.json</code> to your public repo and include the required info:</p>
+<pre><code>{
+  "name": "project-name",
+  "description": "Description of project",
+  "version": "x.y.z",
+  "tags": ["ui", "buttons", "etc"]
+}</pre></code>
+          </li>
+          <li>
+            <p>Enter your project SSH clone URL:</p>
+            <form>
+              <div class="field">
+                <input class="add-url" id="project_url" name="project_url" type="text" placeholder="Project URL" />
+              </div>
+              <div class="actions">
+                <input class="add-url-button" name="commit" type="submit" value="Add" />
+              </div>
+            </form>
+          </li>
+        </ol>
+        <a class="cancel-button" title="Cancel" href="#" data-cancel-project>&times;</a>
+      </div>
+    </header>
+
 
 <ul id="gallery">
    <% @items.each do |item| %>
 
-    <li class="card">
+    <li class="gallery-card">
         <span>
           <h1 class="card-title">
-            <%= link_to item.name, "https://github.com/#{item.user}/#{item.reponame}" %>
-            <%= link_to item.user, "/users/#{item.user}", :class => 'username' %>
+            <%= link_to item.name, "https://github.com/#{item.user}/#{item.reponame}", :class => 'title-link' %>
+            <%= link_to item.user, "/users/#{item.user}", :class => 'author-filter' %>
   
           </h1>
 
@@ -15,13 +50,13 @@
 
           <ul class="tags">
             <% item.tags.each do |tag| %>
-             <li><a href=""><%= tag %></a></li>
+             <li class="tag-list-item"><a href="" class="tag"><%= tag %></a></li>
             <% end %>
           </ul>
 
           <ul class="ghub-info">
-            <li>Last Updated: 12/34/56</li>
-            <li>Github Stars: 9,999</li>
+            <li class="last-updated">Last Updated: 12/34/56</li>
+            <li class="ghub-stars">Github Stars: 9,999</li>
           </ul>
         </span>
       </li>
