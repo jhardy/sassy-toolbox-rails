@@ -50,11 +50,9 @@
           </ul>
 
           <ul class="ghub-info">
-            <li class="last-updated">Last Updated: <%#= l item.last_push_date, :format => :short %> </li>
+            <li class="last-updated">Last Updated: <%= l item.last_push_date, :format => :short %> </li>
             <li class="ghub-stars">Github Stars: <%= item.watchers %></li>
           </ul>
-
-          <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
         </span>
       </li>
    <% end %>
