@@ -1,0 +1,273 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+
+@import "compass/css3";
+
+$base-size: 16px;
+
+@function px2em($target, $context:$base-size){
+  @return ($target/$context) + 0em;
+}
+
+$container-padding-default: px2em(20px);
+$container-padding-large: 5%;
+$container-padding-xlarge: 10%;
+$sass-pink: #c6538c;
+$breakpoints: (
+  small: 520px,
+  small-max: 767px,
+  medium: 768px,
+  medium-max: 1023px,
+  large: 1024px,
+  large-max: 1399px,
+  xlarge: 1400px
+);
+
+@mixin mq($min-value, $max-value:null) {
+  @if map-has-key($breakpoints, $min-value) {
+    @media all and (min-width: map-get($breakpoints, $min-value)) { @content; }
+  }
+  @if map-has-key($breakpoints, $max-value) {
+    @media all and (min-width: map-get($breakpoints, $min-value)) and (max-width: map-get($breakpoints, $max-value)) { @content; }
+  }
+}
+
+%list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+%reset-margin-top { margin-top: 0; }
+
+%clear-float {
+  &:before, &:after { content: " "; display: table; }
+  &:after { clear: both; }
+}
+
+*, * * { @include box-sizing(border-box); }
+
+// Page Structure and Layout
+body { font-size: px2em(16px); }
+a { text-decoration: none; }
+
+header {
+  margin-bottom: px2em(30px);
+  padding: px2em(20px) $container-padding-default;
+  @include mq(large) { padding: px2em(40px) $container-padding-large; }
+  @include mq(xlarge) { padding: px2em(40px) $container-padding-xlarge; }
+}
+
+.page-title { @extend %reset-margin-top; }
+
+#gallery {
+  display: block;
+  padding: 0 $container-padding-default 10px;
+  @extend %list-reset;
+  @extend %clear-float;
+  @include mq(large) { padding: 0 $container-padding-large 10px; }
+  @include mq(xlarge) { padding: 0 $container-padding-xlarge 10px; }
+}
+
+.gallery-card {
+  margin: 0 0 px2em(20px);
+  width: 100%;
+  height: auto;
+  @include mq(small) {
+    float: left;
+    width: 50%;
+    padding: 0 px2em(10px);
+  }
+  @include mq(medium) { width: 33.33%; }
+  @include mq(large) { width: 25%; }
+  @include mq(xlarge) {
+    width: 20%;
+    &:nth-of-type(5n+1) { clear: both; }
+  }
+
+  > span { display: block; }
+
+  .card-title { @extend %reset-margin-top; }
+
+  ul { @extend %list-reset; }
+}
+
+footer {
+  padding-top: px2em(40px);
+  padding-bottom: px2em(40px);
+  padding-left: $container-padding-default;
+  padding-right: $container-padding-default;
+  @include mq(large) {
+    padding-left: $container-padding-large;
+    padding-right: $container-padding-large;
+  }
+  @include mq(xlarge) {
+    padding-left: $container-padding-xlarge;
+    padding-right: $container-padding-xlarge;
+  }
+}
+
+// Page Styles
+p {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+header { background-color: $sass-pink;
+  * { color: #fff; }
+}
+
+.title-cta { text-align: center; }
+
+.page-title {
+  font-family: "Bigshot One", Helvetica, Arial, sans-serif;
+  margin-bottom: 0;
+  font-size: px2em(40px);
+  @include mq(medium) { font-size: px2em(60px); }
+  @include mq(large) { font-size: px2em(80px); }
+}
+
+.page-description {
+  margin-bottom: px2em(30px);
+  font-size: px2em(16px);
+  @include mq(medium) { font-size: px2em(20px); }
+  @include mq(large) { font-size: px2em(22px); }
+  font-weight: 300;
+  margin-top: px2em(6px);
+  color: lighten($sass-pink, 30%);
+}
+
+.button {
+  display: inline-block;
+  background-color: darken($sass-pink, 15%);
+  padding: px2em(15px) px2em(35px);
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: px2em(16px);
+  margin-bottom: px2em(20px);
+  @include mq(medium) {
+    padding: px2em(20px) px2em(50px);
+    font-size: px2em(18px);
+  }
+  @include border-radius(4px);
+  @include single-transition(background-color, 200ms);
+
+  &:hover { background-color: darken($sass-pink, 10%); }
+  &:active { @include box-shadow(0 2px 2px rgba(black, 0.1) inset, 0 1px 0 rgba(white, 0.15)); }
+}
+
+.gallery-card > span {
+  padding: px2em(16px);
+  border: solid 1px #ddd;
+  @include border-radius(4px);
+}
+
+.card-title {
+  font-size: px2em(22px);
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  display: block;
+  line-height: 1;
+}
+
+.title-link {
+  display: block;
+  width: 100%;
+  color: $sass-pink;
+  font-weight: 600;
+
+  &:hover, &:active { color: darken($sass-pink, 20%); }
+}
+
+.author-filter {
+  display: inline-block;
+  color: #aaa;
+  font-weight: 300;
+  font-size: px2em(12px);
+
+  &:hover, &:active { color: #222; }
+}
+
+.card-description {
+  font-size: px2em(14px);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.tag-list-item {
+  margin-right: 5px;
+  margin-bottom: px2em(15px);
+  display: inline-block;
+
+  &:last-child { margin-right: 0; }
+}
+
+.tag {
+  float: left;
+  background-color: #eee;
+  color: #888;
+  padding: px2em(6px) px2em(14px) px2em(7px);
+  margin-bottom: 4px;
+  font-size: px2em(11px);
+  @include border-radius(4px);
+  @include single-transition(all, 200ms);
+
+  &:hover {
+    background-color: $sass-pink;
+    color: #fff;
+  }
+}
+
+.ghub-info {
+  font-size: px2em(12px);
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+
+  > li { float: left; }
+}
+
+.last-updated {
+  background: image-url('icons.svg') no-repeat left bottom;
+  height: 16px;
+  padding-left: 22px;
+  margin-bottom: 5px;
+  margin-right: 14px;
+}
+
+.ghub-stars {
+  background: image-url('icons.svg') no-repeat left top;
+  height: 16px;
+  padding-left: 22px;
+}
+
+footer {
+  background-image: image-url('grey-prism.png');
+  background-size: 50%;
+
+  * { text-align: center; }
+
+  a { color: $sass-pink;
+    &:hover, &:active { color: darken($sass-pink, 10%); text-decoration: underline; }
+  }
+}
+
+.footer-title {
+  font-family: "Bigshot One", Helvetica, Arial, sans-serif;
+  font-size: px2em(28px);
+  margin-bottom: 0;
+}
+
+.authors {
+  color: #888;
+  margin-top: px2em(4px);
+}
