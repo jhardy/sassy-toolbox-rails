@@ -17,12 +17,14 @@
 
 
 $(document).ready(function() {
-  $('[data-add-project]').on('click', function() {
+  $('[data-add-project]').on('click', function(e) {
+  	e.preventDefault();
     $(this).hide();
     $('.add-project').fadeIn();
   });
 
-  $('[data-cancel-project]').on('click', function() {
+  $('[data-cancel-project]').on('click', function(e) {
+  	e.preventDefault();
     $('.add-project').hide();
     $('[data-add-project]').fadeIn();
   });

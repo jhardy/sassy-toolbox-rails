@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.all 
+    @item = Item.new
   end
 
   # GET /items/1
@@ -28,8 +29,11 @@ class ItemsController < ApplicationController
     project_url = params[:project_url]
     username = project_url[/\:(.*?)\//, 1]
     reponame = project_url[/\/(.*?).git/, 1]
-    parsed_params = { reponame: reponame, user: username, url: project_url }
 
+    repo_info = Octokit.repo("#{username}/#{reponame}")
+    parsed_params = { reponame: reponame, user: username, url: project_url, last_push_date: repo_info.updated_at, watchers: repo_info.watchers  }
+
+  
     manifest_data = Octokit.contents("#{username}/#{reponame}", :path => 'sassmanifest.json', :accept => "application/vnd.github-blob.raw")
     manifest_hash = JSON.parse(manifest_data)
 

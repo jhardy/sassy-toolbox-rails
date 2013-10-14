@@ -14,20 +14,15 @@
 <pre><code>{
   "name": "project-name",
   "description": "Description of project",
-  "version": "x.y.z",
   "tags": ["ui", "buttons", "etc"]
 }</pre></code>
           </li>
           <li>
             <p>Enter your project SSH clone URL:</p>
-            <form>
-              <div class="field">
-                <input class="add-url" id="project_url" name="project_url" type="text" placeholder="Project URL" />
-              </div>
-              <div class="actions">
-                <input class="add-url-button" name="commit" type="submit" value="Add" />
-              </div>
-            </form>
+
+           <%= render 'form' %>
+
+         
           </li>
         </ol>
         <a class="cancel-button" title="Cancel" href="#" data-cancel-project>&times;</a>
@@ -55,9 +50,11 @@
           </ul>
 
           <ul class="ghub-info">
-            <li class="last-updated">Last Updated: 12/34/56</li>
-            <li class="ghub-stars">Github Stars: 9,999</li>
+            <li class="last-updated">Last Updated: <%#= l item.last_push_date, :format => :short %> </li>
+            <li class="ghub-stars">Github Stars: <%= item.watchers %></li>
           </ul>
+
+          <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
         </span>
       </li>
    <% end %>
