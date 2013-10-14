@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+	
+	 <thead>
+    <tr>
+      <th>Project Name</th>
+      <th>Description</th>
+      <th>Tags</th>
+    </tr>
+  </thead>
+
+	<% @user_items.each do |item| %>
+	 <tr>
+    <td><%= link_to item.name, "https://github.com/#{item.user}/#{item.reponame}" %></td>
+    <td><%= item.description %></td>
+      
+     <td>
+       <ul>
+         <% item.tags.each do |tag| %>
+            <div>
+              <li><a href=""><%= tag %></a></li>
+            </div>
+         <% end %>
+       </ul> 
+    </td>
+    </tr>
+	<% end %>
+
+     </table>
+
