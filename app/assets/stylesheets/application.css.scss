@@ -1,18 +1,7 @@
+
+@import "normalize";
+
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require_tree .
- */
-
-
 @import "compass/css3";
 
 $base-size: 16px;
@@ -25,6 +14,7 @@ $container-padding-default: px2em(20px);
 $container-padding-large: 5%;
 $container-padding-xlarge: 10%;
 $sass-pink: #c6538c;
+
 $breakpoints: (
   small: 520px,
   small-max: 767px,
@@ -270,4 +260,4 @@ footer {
 .authors {
   color: #888;
   margin-top: px2em(4px);
-}
+}*/
