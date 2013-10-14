@@ -1,5 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+
+<div class="user-details">
+	<%= image_tag "http://www.gravatar.com/avatar/#{@user.gravatar_id}" %>
+	<%= link_to "github profile", "https://github.com/#{@user.login}" %>
+	<%= link_to "persoal site", @user.blog %>
+
+</div>
 <ul id="gallery">
    <% @user_items.each do |item| %>
 

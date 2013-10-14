@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user_items = Item.where(user: params[:id])
+    @user = Octokit.user params[:id]
   end
 
   # GET /users/new
